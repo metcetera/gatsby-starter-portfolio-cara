@@ -35,7 +35,7 @@ const IndexPage = () => (
           <Svg icon="upDown" width={8} color="icon_darkest" left="95%" top="90%" />
           <Svg icon="upDown" hiddenMobile width={24} color="icon_darkest" left="40%" top="80%" />
           <Svg icon="triangle" width={8} stroke color="icon_darkest" left="25%" top="5%" />
-          <Svg icon="circle" width={64} color="icon_darkest" left="95%" top="5%" />
+          <Svg icon="circle" width={18} color="icon_darkest" left="95%" top="5%" />
           <Svg icon="box" hiddenMobile width={64} color="icon_darkest" left="5%" top="90%" />
           <Svg icon="box" width={6} color="icon_darkest" left="10%" top="10%" />
           <Svg icon="box" width={12} color="icon_darkest" left="40%" top="30%" />
