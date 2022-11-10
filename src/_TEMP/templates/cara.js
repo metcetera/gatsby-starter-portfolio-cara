@@ -7,9 +7,11 @@ import About from "@lekoarts/gatsby-theme-cara/src/components/about"
 import Contact from "@lekoarts/gatsby-theme-cara/src/components/contact"
 import Seo from "@lekoarts/gatsby-theme-cara/src/components/seo"
 
-const Homepage = () => (
+const Cara = () => (
   <Layout>
+    QERQWRE QERQWRE QERQWRE
     <Parallax pages={5}>
+      YTUYTUYTUYTYUUYT
       <Hero offset={0} factor={1} />
       <Projects offset={1} factor={2} />
       <About offset={3} factor={1} />
@@ -18,6 +20,6 @@ const Homepage = () => (
   </Layout>
 )
 
-export default Homepage
+export default Cara
 
 export const Head = () => <Seo />
