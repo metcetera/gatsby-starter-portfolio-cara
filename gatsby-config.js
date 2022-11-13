@@ -20,6 +20,10 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-theme-ui',
+      options: {},
+    },
+    {
       resolve: `@lekoarts/gatsby-theme-cara`,
       // See the theme's README for all available options
       options: {},
