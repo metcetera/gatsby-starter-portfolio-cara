@@ -124,6 +124,9 @@ const theme = merge(tailwind, {
       mb: 2,
       color: `heading`,
     },
+    spinner: {
+      color: `#FFFF00`,
+    },
   },
   layout: {
     container: {

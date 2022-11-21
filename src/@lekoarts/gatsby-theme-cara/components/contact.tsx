@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react'
-import { jsx, Label, Input, Button, Flex, Text } from "theme-ui"
+import React, { Fragment, useEffect, useState } from 'react'
+import { jsx, Label, Input, Button, Flex, Text, Spinner, Alert, Close } from "theme-ui"
 import SteinStore from "stein-js-client";
 import { useForm, Controller, useController } from "react-hook-form";
 
@@ -13,13 +13,16 @@ import Footer from "./footer"
 import ContactMDX from "@lekoarts/gatsby-theme-cara/src/sections/contact.mdx"
 
 const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) => {
-  const store = new SteinStore("https://api.steinhq.com/v1/storages/6376519ceced9b09e9a5a02a");
+  const [ isLoading, setIsLoading] = useState(false);
+  const [ hasSubmitError, setHasSubmitError] = useState();
+  const store = new SteinStore("https://api.steinhq.com/v1/storages/6376519ceced9b09e9a5a02aXXX");
 
   const {
     watch,
     formState: { errors },
     handleSubmit,
-    control
+    control,
+    reset
   } = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onBlur',
@@ -29,6 +32,7 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
     const date = new Date().toISOString();
 
     console.log('Submitting: ', JSON.stringify(data));
+    setIsLoading(true)
 
     store
     .append("cheers-sidney", [
@@ -39,11 +43,24 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
       }
     ])
     .then(res => {
-      console.log(res);
+      console.log(res)
+      setIsLoading(false)
+      if (res.error) {
+        setHasSubmitError(res.error)
+      } else {
+        reset({
+          name: '',
+          days: '',
+        })
+        }
     });
   };
 
   console.log(errors, watch("name")); // watch input value by passing the name of it
+
+  useEffect(() => {
+    if (watch("name") !== '') setHasSubmitError('')
+  }, [watch("name")])
 
   return ( <div>
     <Divider fill="divider" speed={0.2} offset={offset} factor={factor}>
@@ -73,6 +90,11 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
       <Inner>
         <ContactMDX />
         <form onSubmit={handleSubmit(onSubmit)}>
+          { !isLoading && hasSubmitError && 
+            <Alert sx={{mb: 24}}>
+              Bummer, there was an error submitting. Please try again later!
+            </Alert>
+          }
 
           <Controller
             name="name"
@@ -122,7 +144,8 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
             rules={{ required: 'Required!' }}
           />
 
-          <Button type="submit" sx={{mt: 12}} >Submit your wise vision!</Button>
+          <Button type="submit" sx={{mt: 12, width: 300}} disabled={isLoading} >{isLoading ? <Spinner size={16} sx={{color: 'white', ml: 20}}/> : 'Submit your wise vision!'}</Button>
+          
         </form>
         <Flex sx={{mb: 400}}></Flex>
       </Inner>
@@ -132,16 +155,16 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
       <UpDown>
         <Svg icon="upDown" hiddenMobile width={8} color="icon_darkest" left="70%" top="20%" />
         <Svg icon="triangle" width={8} stroke color="icon_darkest" left="25%" top="5%" />
+        <Svg icon="circle" width={6} color="icon_brightest" left="4%" top="20%" />
+        <Svg icon="circle" width={12} color="icon_darkest" left="40%" top="60%" />
       </UpDown>
       <UpDownWide>
         <Svg icon="triangle" width={12} stroke color="icon_brightest" left="95%" top="50%" />
         <Svg icon="circle" width={6} color="icon_brightest" left="85%" top="15%" />
         <Svg icon="upDown" hiddenMobile width={8} color="icon_darkest" left="45%" top="10%" />
+        <Svg icon="box" width={6} color="icon_darkest" left="80%" top="30%" />
+        <Svg icon="hexa" width={8} stroke color="icon_darkest" left="80%" top="70%" />
       </UpDownWide>
-      <Svg icon="circle" width={6} color="icon_brightest" left="4%" top="20%" />
-      <Svg icon="circle" width={12} color="icon_darkest" left="70%" top="60%" />
-      <Svg icon="box" width={12} color="icon_darkest" left="20%" top="30%" />
-      <Svg icon="hexa" width={8} stroke color="icon_darkest" left="80%" top="70%" />
     </Divider>
   </div>
 )}
