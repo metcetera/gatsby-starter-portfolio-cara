@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import React, { Fragment, useEffect, useState } from 'react'
-import { jsx, Label, Input, Button, Flex, Text, Spinner, Alert, Close } from "theme-ui"
+import { Fragment, useEffect, useState } from 'react'
+import { jsx, Label, Input, Button, Flex, Text, Spinner, Alert } from "theme-ui"
 import SteinStore from "stein-js-client";
-import { useForm, Controller, useController } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 import Divider from "@lekoarts/gatsby-theme-cara/src/elements/divider"
 import Inner from "@lekoarts/gatsby-theme-cara/src/elements/inner"
@@ -14,8 +14,8 @@ import ContactMDX from "@lekoarts/gatsby-theme-cara/src/sections/contact.mdx"
 
 const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) => {
   const [ isLoading, setIsLoading] = useState(false);
-  const [ hasSubmitError, setHasSubmitError] = useState();
-  const store = new SteinStore("https://api.steinhq.com/v1/storages/6376519ceced9b09e9a5a02aXXX");
+  const [ hasSubmitError, setHasSubmitError] = useState(undefined);
+  const store = new SteinStore("https://api.steinhq.com/v1/storages/637c9080eced9b09e9a644ac");
 
   const {
     watch,
@@ -59,7 +59,7 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
   console.log(errors, watch("name")); // watch input value by passing the name of it
 
   useEffect(() => {
-    if (watch("name") !== '') setHasSubmitError('')
+    if (watch("name") !== '') setHasSubmitError(undefined)
   }, [watch("name")])
 
   return ( <div>
@@ -105,7 +105,7 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
               formState,
             }) => (
               <Fragment>
-                <Flex><Label htmlFor="name">Name</Label>
+                <Flex><Label htmlFor="name">INFO email</Label>
                 { error && <Text role="alert" sx={{color: 'red', pr: '10px'}}>{error.message}</Text>}
                 </Flex>
                 <Input
@@ -129,14 +129,15 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
               formState,
             }) => (
               <Fragment>
-                <Flex><Label htmlFor="days">Days until</Label>
+                <Flex><Label htmlFor="days">Days until return</Label>
                 { error && <Text role="alert" sx={{color: 'red', pr: '10px'}}>{error.message}</Text>}
                 </Flex>
                 <Input
                   value={value}
+                  type="number"
                   onChange={onChange}
                   onBlur={onBlur}
-                  placeholder="Your number of days here"
+                  placeholder="Number of days here"
                   sx={{ mb: 24, borderColor: error ? 'red' : 'green'}}
                 />
               </Fragment>
