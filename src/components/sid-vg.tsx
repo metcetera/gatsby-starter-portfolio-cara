@@ -11,42 +11,56 @@ type SVGProps = {
   top: string
 }
 
-const SidVG = ({ stroke = false, color = ``, width, left, top = '', days, email }) => (
-  <Box 
-    sx={{
-      position: `absolute`,
-      stroke: stroke ? `currentColor` : `none`,
-      display: `block`,
-      width,
-      height: width,
-      left,
-      top,
-      // border: '1px solid lightgrey',
-    }}
-  >
-    <img src={SidSVG} 
-          sx={{
-            width,
-          }}
-      
-     />
+const SidVG = ({ stroke = false, color = ``, width, left, top = '', showName = false, loading = false, days, email }) => {
+
+  return (
     <Box 
       sx={{
-          width: '100%',
-          fontSize: '12px',
-          color: tailwind.colors.gray[5],
-          // position: `relative`,
-          // display: `flex`,
-          // transform: 'rotate(-90deg)',
-          // bottom: -10 * width,
-          textAlign: 'center',
-          // border: '1px solid lightgrey',
-        }}
+        position: `absolute`,
+        display: `block`,
+        width: !loading ? width : 0,
+        height: width,
+        left: !loading ? left : 0,
+        top: !loading ? top : 0,
+        transform: loading ? 'rotateY(180deg) rotateX(180deg)' : '',
+        transitionDuration: '1000ms',
+        transitionProperty: 'all',
+        // border: '1px solid lightgrey',
+      }}
     >
-      {days} day{days > 1 ? 's' : ''}
-    </Box>
+      <img 
+        src={SidSVG} 
+        sx={{
+          width: !loading ? width : 0,
+          transitionDuration: '1000ms',
+          transitionProperty: 'all',
+        }}
+      />
+      <Box 
+        sx={{
+            display: !loading ? 'block' : 'none',
+            width,
+            maxwidth: width,
+            fontSize: '12px',
+            color: loading ? tailwind.colors.red[5] : tailwind.colors.gray[5],
+            // position: `relative`,
+            // display: `flex`,
+            // transform: 'rotate(-90deg)',
+            // bottom: -10 * width,
+            textAlign: 'center',
+            wordBreak: 'break-word',
+            // border: '1px solid lightgrey',
+            transitionDuration: '3000ms',
+            transitionProperty: 'all',
+            }}
+      >
+        {days} day{days > 1 ? 's' : ''}
+        <br />
+        {showName && <span>{email}</span>}
+      </Box>
 
-  </Box>
-)
+    </Box>
+  )
+}
 
 export default SidVG
