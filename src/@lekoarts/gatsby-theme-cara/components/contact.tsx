@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { Fragment, useEffect, useState } from 'react'
+import { navigate } from "gatsby"
 import { jsx, Label, Input, Button, Flex, Text, Spinner, Alert } from "theme-ui"
 import SteinStore from "stein-js-client";
 import { useForm, Controller } from "react-hook-form";
@@ -31,32 +32,30 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
   const onSubmit = (data) => {
     const date = new Date().toISOString();
 
-    console.log('Submitting: ', JSON.stringify(data));
     setIsLoading(true)
 
     store
-    .append("cheers-sidney", [
-      {
-        date,
-        email: data.name,
-        days: data.days,
-      }
-    ])
-    .then(res => {
-      console.log(res)
-      setIsLoading(false)
-      if (res.error) {
-        setHasSubmitError(res.error)
-      } else {
-        reset({
-          name: '',
-          days: '',
-        })
+      .append("cheers-sidney", [
+        {
+          date,
+          email: data.name,
+          days: data.days,
         }
-    });
+      ])
+      .then(res => {
+        console.log(res)
+        setIsLoading(false)
+        if (res.error) {
+          setHasSubmitError(res.error)
+        } else {
+          reset({
+            name: '',
+            days: '',
+          })
+          navigate("/estimations/");
+          }
+      });
   };
-
-  console.log(errors, watch("name")); // watch input value by passing the name of it
 
   useEffect(() => {
     if (watch("name") !== '') setHasSubmitError(undefined)
@@ -110,9 +109,10 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
                 </Flex>
                 <Input
                   value={value}
+                  type="email"
                   onChange={onChange}
                   onBlur={onBlur}
-                  placeholder="Your name here"
+                  placeholder="Your email here"
                   sx={{ mb: 24, borderColor: error ? 'red' : 'green'}}
                 />
               </Fragment>
@@ -135,6 +135,9 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
                 <Input
                   value={value}
                   type="number"
+                  step="1"
+                  min="1"
+                  max="9999"
                   onChange={onChange}
                   onBlur={onBlur}
                   placeholder="Number of days here"

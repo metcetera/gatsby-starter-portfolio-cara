@@ -1,17 +1,21 @@
-import React, { useEffect, useMemo } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import SteinStore from "stein-js-client";
-import { Link } from "gatsby"
+import { Flex, Button } from "theme-ui"
+
 import { Parallax } from "@react-spring/parallax"
-import { Themed } from "@theme-ui/mdx"
 import Layout from "@lekoarts/gatsby-theme-cara/src/components/layout"
 import Divider from "@lekoarts/gatsby-theme-cara/src/elements/divider"
 import { UpDown, UpDownWide } from "@lekoarts/gatsby-theme-cara/src/styles/animations"
-import Svg from "@lekoarts/gatsby-theme-cara/src/components/svg"
 import Seo from "@lekoarts/gatsby-theme-cara/src/components/seo"
 import Content from "@lekoarts/gatsby-theme-cara/src/elements/content"
 import Inner from "@lekoarts/gatsby-theme-cara/src/elements/inner"
+import SidVg from "../components/sid-vg"
 
 const Estimations = () => { 
+  const [ uniqueList, setUuniqueList ] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
+  const [refresh, setRefresh] = useState(0);
+
   const store = useMemo(() => {
     const _store = new SteinStore("https://api.steinhq.com/v1/storages/637c9080eced9b09e9a644ac")
 
@@ -22,50 +26,53 @@ const Estimations = () => {
     store
       .read("cheers-sidney", { limit: 1111 })
       .then(data => {
-        console.log(data);
+        console.log('raw: ', data);
+        setStartIndex(0)
+        setUuniqueList([...new Map(data.map(v => [v.email, v])).values()])
       });
-  },[store])
+  },[store, refresh])
+
+  console.log(startIndex, 'uniqueList: ', uniqueList);
+
 
   return (
     <Layout>
       <Parallax pages={1}>
         <div>
           <Divider speed={0.2} offset={0} factor={1}>
-            <UpDown>
-              <Svg icon="triangle" width={48} stroke color="icon_brightest" left="10%" top="20%" />
-              <Svg icon="hexa" width={48} stroke color="icon_brightest" left="60%" top="70%" />
-              <Svg icon="box" width={6} color="icon_brightest" left="60%" top="15%" />
-            </UpDown>
+
+            <Flex sx={{justifyContent: 'center'}} >
+              {startIndex > 0 && <Button disabled={startIndex <= 0} onClick={() => { console.log(startIndex); setStartIndex((startIndex > 0 ? startIndex - 20 : 0))}} sx={{zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >{'previous'}</Button>}
+              <Button sx={{zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >{`(${startIndex + 1} - ${(startIndex + 20 > uniqueList.length) ? uniqueList.length : startIndex + 20})`}</Button>
+              <Button onClick={() => { setRefresh((refresh + 1))}} sx={{zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >refresh</Button>
+              {!uniqueList || startIndex + 20 <= uniqueList.length && <Button disabled={!uniqueList || startIndex + 20 >= uniqueList.length } onClick={() => { console.log(startIndex); setStartIndex(startIndex + 20)}} sx={{zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >{'next'}</Button>}
+            </Flex>
+
             <UpDownWide>
-              <Svg icon="arrowUp" width={16} color="icon_brightest" left="80%" top="10%" />
-              <Svg icon="triangle" width={12} stroke color="icon_brightest" left="90%" top="50%" />
-              <Svg icon="circle" width={16} color="icon_brightest" left="70%" top="90%" />
-              <Svg icon="triangle" width={16} stroke color="icon_brightest" left="30%" top="65%" />
-              <Svg icon="cross" width={16} stroke color="icon_brightest" left="28%" top="15%" />
-              <Svg icon="circle" width={6} color="icon_brightest" left="75%" top="10%" />
-              <Svg icon="upDown" width={8} color="icon_brightest" left="45%" top="10%" />
+              { uniqueList.length >= (startIndex + 1) && <SidVg width={20} left="30%" top="40%" days={uniqueList[startIndex + 1 - 1].days} email={uniqueList[startIndex + 1 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 19) && <SidVg width={12} left="20%" top="65%" days={uniqueList[startIndex + 19 - 1].days} email={uniqueList[startIndex + 19 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 8) && <SidVg width={16} left="40%" top="10%" days={uniqueList[startIndex + 8 - 1].days} email={uniqueList[startIndex + 8 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 16) && <SidVg width={8} left="50%" top="30%" days={uniqueList[startIndex + 16 - 1].days} email={uniqueList[startIndex + 16 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 4) && <SidVg width={16} left="70%" top="70%" days={uniqueList[startIndex + 4 - 1].days} email={uniqueList[startIndex + 4 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 10) && <SidVg width={8} left="75%" top="10%" days={uniqueList[startIndex + 10 - 1].days} email={uniqueList[startIndex + 10 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 13) && <SidVg width={12} left="85%" top="30%" days={uniqueList[startIndex + 13 - 1].days} email={uniqueList[startIndex + 13 - 1].email} /> }
             </UpDownWide>
-            <Svg icon="circle" width={24} color="icon_brightest" left="5%" top="70%" />
-            <Svg icon="circle" width={6} color="icon_brightest" left="4%" top="20%" />
-            <Svg icon="circle" width={12} color="icon_brightest" left="50%" top="60%" />
-            <Svg icon="upDown" width={8} color="icon_brightest" left="95%" top="90%" />
-            <Svg icon="upDown" width={24} color="icon_brightest" left="40%" top="80%" />
-            <Svg icon="triangle" width={8} stroke color="icon_brightest" left="25%" top="5%" />
-            <Svg icon="circle" width={12} color="icon_brightest" left="95%" top="5%" />
-            <Svg icon="box" width={12} color="icon_brightest" left="5%" top="90%" />
-            <Svg icon="box" width={6} color="icon_brightest" left="10%" top="10%" />
-            <Svg icon="box" width={12} color="icon_brightest" left="40%" top="30%" />
-            <Svg icon="hexa" width={16} stroke color="icon_brightest" left="10%" top="50%" />
-            <Svg icon="hexa" width={8} stroke color="icon_brightest" left="80%" top="70%" />
+            <UpDown>
+              { uniqueList.length >= (startIndex + 5) && <SidVg width={8} left="5%" top="70%" days={uniqueList[startIndex + 5 - 1].days} email={uniqueList[startIndex + 5 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 14) && <SidVg width={12} left="20%" top="20%" days={uniqueList[startIndex + 14 - 1].days} email={uniqueList[startIndex + 14 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 3) && <SidVg width={12} left="60%" top="60%" days={uniqueList[startIndex + 3 - 1].days} email={uniqueList[startIndex + 3 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 11) && <SidVg width={8} left="60%" top="15%" days={uniqueList[startIndex + 11 - 1].days} email={uniqueList[startIndex + 11 - 1].email} /> }
+              { uniqueList.length >= (startIndex + 18) && <SidVg width={8} left="85%" top="80%" days={uniqueList[startIndex + 18 - 1].days} email={uniqueList[startIndex + 18 - 1].email} /> }
+            </UpDown>
+            { uniqueList.length >= (startIndex + 1) && <SidVg width={8} left="5%" top="20%" days={uniqueList[startIndex + 1 - 1].days} email={uniqueList[startIndex + 1 - 1].email} /> }
+            { uniqueList.length >= (startIndex + 9) && <SidVg width={12} left="15%" top="45%" days={uniqueList[startIndex + 9 - 1].days} email={uniqueList[startIndex + 9 - 1].email} /> }
+            { uniqueList.length >= (startIndex + 2) && <SidVg width={8} left="25%" top="5%" days={uniqueList[startIndex + 2 - 1].days} email={uniqueList[startIndex + 2 - 1].email} /> }
+            { uniqueList.length >= (startIndex + 15) && <SidVg width={12} left="30%" top="85%" days={uniqueList[startIndex + 15 - 1].days} email={uniqueList[startIndex + 15 - 1].email} /> }
+            { uniqueList.length >= (startIndex + 7) && <SidVg width={12} left="45%" top="70%" days={uniqueList[startIndex + 7 - 1].days} email={uniqueList[startIndex + 7 - 1].email} /> }
+            { uniqueList.length >= (startIndex + 17) && <SidVg width={12} left="65%" top="40%" days={uniqueList[startIndex + 17 - 1].days} email={uniqueList[startIndex + 17 - 1].email} /> }
+            { uniqueList.length >= (startIndex + 6) && <SidVg width={8} left="80%" top="55%" days={uniqueList[startIndex + 6 - 1].days} email={uniqueList[startIndex + 6 - 1].email} /> }
+            { uniqueList.length >= (startIndex + 12) && <SidVg width={12} left="85%" top="10%" days={uniqueList[startIndex + 12 - 1].days} email={uniqueList[startIndex + 12 - 1].email} /> }
           </Divider>
-          <Content sx={{ variant: `texts.bigger` }} speed={0.4} offset={0} factor={1}>
-            <Inner>
-              <Themed.h1>Estimations</Themed.h1>
-              <Themed.p>
-                Go back to <Link to="/">homepage</Link>.
-              </Themed.p>
-            </Inner>
-          </Content>
         </div>
       </Parallax>
     </Layout>
