@@ -27,12 +27,14 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
   } = useForm({
     mode: 'onSubmit',
     reValidateMode: 'onBlur',
+    // defaultValues: { name: localStorage.getItem('cheers-sidney-email') },
   });
 
   const onSubmit = (data) => {
     const date = new Date().toISOString();
 
     setIsLoading(true)
+    localStorage.setItem('cheers-sidney-email', data.name)
 
     store
       .append("cheers-sidney", [
@@ -49,7 +51,7 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
           setHasSubmitError(res.error)
         } else {
           reset({
-            name: '',
+            name: localStorage.getItem('cheers-sidney-email'),
             days: '',
           })
           navigate("/estimations/");
@@ -98,12 +100,13 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
           <Controller
             name="name"
             control={control}
+            defaultValue={localStorage.getItem('cheers-sidney-email')}
             render={({
               field: { onChange, onBlur, value },
               fieldState: { error },
             }) => (
               <Fragment>
-                <Flex><Label htmlFor="name">INFO email</Label>
+                <Flex><Label htmlFor="name">Email</Label>
                 { error && <Text role="alert" sx={{color: 'red', pr: '10px'}}>{error.message}</Text>}
                 </Flex>
                 <Input

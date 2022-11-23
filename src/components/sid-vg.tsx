@@ -13,6 +13,8 @@ type SVGProps = {
 
 const SidVG = ({ stroke = false, color = ``, width, left, top = '', showName = false, loading = false, days, email }) => {
 
+  const isOwnEstimate = localStorage.getItem('cheers-sidney-email') === email;
+
   return days && (
     <Box 
       sx={{
@@ -25,7 +27,6 @@ const SidVG = ({ stroke = false, color = ``, width, left, top = '', showName = f
         transform: loading ? 'rotateY(180deg) rotateX(180deg)' : '',
         transitionDuration: '1000ms',
         transitionProperty: 'all',
-        // border: '1px solid lightgrey',
       }}
     >
       <img 
@@ -54,11 +55,12 @@ const SidVG = ({ stroke = false, color = ``, width, left, top = '', showName = f
             // border: '1px solid lightgrey',
             transitionDuration: '3000ms',
             transitionProperty: 'all',
-            }}
+            border: isOwnEstimate ? '1px solid' : '',
+          }}
       >
         <strong>{days}</strong> day{days > 1 ? 's' : ''}
         <br />
-        {showName && <Text sx={{}}>{email}</Text>}
+        {(showName || isOwnEstimate) && <Text >{isOwnEstimate ? 'YOU' : email}</Text>}
       </Box>
 
     </Box>
