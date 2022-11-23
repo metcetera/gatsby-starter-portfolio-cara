@@ -30,7 +30,7 @@ const Estimations = () => {
     store
       .read("cheers-sidney", { limit: 1111 })
       .then(data => {
-        console.log('raw: ', data);
+        // console.log('raw: ', data);
         setUuniqueList([...new Map(data.map(v => [v.email, v])).values()])
         setStartIndex(0)
         setLoading(false)
@@ -43,7 +43,6 @@ const Estimations = () => {
     setLoading(true)
 
     setTimeout(() => {
-      console.log("Delayed for 1 second.");
       setLoading(false)
       setHowname(false)
     }, 1000)
@@ -53,7 +52,7 @@ const Estimations = () => {
     setHowname(!showName)
   }
 
-  console.log(startIndex, 'uniqueList: ', uniqueList);
+  // console.log(startIndex, 'uniqueList: ', uniqueList);
 
 
   return (
@@ -106,4 +105,4 @@ const Estimations = () => {
 
 export default Estimations
 
-
+export const Head = () => <Seo title="Estimations" />
