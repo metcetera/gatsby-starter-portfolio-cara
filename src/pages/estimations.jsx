@@ -69,11 +69,11 @@ const Estimations = () => {
 
 
             <Flex sx={{justifyContent: 'center'}} >
-              <Button disabled={startIndex <= 0} onClick={() => { handleClickVotes((startIndex > 0 ? startIndex - 20 : 0))}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${startIndex <= 0 ? 'lightgrey' : 'white'}`}} >{'previous'}</Button>
+              <Button disabled={startIndex <= 0} onClick={() => { handleClickVotes((startIndex > 0 ? startIndex - 20 : 0))}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${startIndex <= 0 ? 'lightgrey' : 'white'}`}} >{'previous set'}</Button>
               <Button onClick={handleClickName} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >√</Button>
               <Button sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >{`(${startIndex + 1} - ${(startIndex + 20 > uniqueList.length) ? uniqueList.length : startIndex + 20})`}</Button>
               <Button onClick={() => { setRefresh((refresh + 1))}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >refresh</Button>
-              <Button disabled={!uniqueList || startIndex + 20 >= uniqueList.length } onClick={() => { handleClickVotes(startIndex + 20)}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${!uniqueList || startIndex + 20 >= uniqueList.length ? 'lightgrey' : 'white'}`}} >{'next'}</Button>
+              <Button disabled={!uniqueList || startIndex + 20 >= uniqueList.length } onClick={() => { handleClickVotes(startIndex + 20)}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${!uniqueList || startIndex + 20 >= uniqueList.length ? 'lightgrey' : 'white'}`}} >{'next set'}</Button>
             </Flex>
             <Flex sx={{justifyContent: 'center'}} >
               <Themed.h2>Estimations</Themed.h2>
@@ -84,24 +84,24 @@ const Estimations = () => {
               <SidVg width={12} left="20%" top="65%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 19) && uniqueList[startIndex + 19 - 1].days} email={ uniqueList.length >= (startIndex + 19) && uniqueList[startIndex + 19 - 1].email} />
               <SidVg width={16} left="40%" top="10%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 8) && uniqueList[startIndex + 8 - 1].days} email={ uniqueList.length >= (startIndex + 8) && uniqueList[startIndex + 8 - 1].email} />
               <SidVg width={8} left="50%" top="30%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 16) && uniqueList[startIndex + 16 - 1].days} email={ uniqueList.length >= (startIndex + 16) && uniqueList[startIndex + 16 - 1].email} />
-              <SidVg width={16} left="70%" top="70%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 4) && uniqueList[startIndex + 4 - 1].days} email={ uniqueList.length >= (startIndex + 4) && uniqueList[startIndex + 4 - 1].email} />
+              <SidVg width={16} left="70%" top="70%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 7) && uniqueList[startIndex + 7 - 1].days} email={ uniqueList.length >= (startIndex + 7) && uniqueList[startIndex + 7 - 1].email} />
               <SidVg width={8} left="75%" top="10%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 10) && uniqueList[startIndex + 10 - 1].days} email={ uniqueList.length >= (startIndex + 10) && uniqueList[startIndex + 10 - 1].email} />
               <SidVg width={12} left="85%" top="30%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 13) && uniqueList[startIndex + 13 - 1].days} email={ uniqueList.length >= (startIndex + 13) && uniqueList[startIndex + 13 - 1].email} />
             </UpDownWide>
             <UpDown>
               <SidVg width={8} left="5%" top="70%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 5) && uniqueList[startIndex + 5 - 1].days} email={ uniqueList.length >= (startIndex + 5) && uniqueList[startIndex + 5 - 1].email} />
               <SidVg width={12} left="20%" top="20%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 14) && uniqueList[startIndex + 14 - 1].days} email={ uniqueList.length >= (startIndex + 14) && uniqueList[startIndex + 14 - 1].email} />
-              <SidVg width={12} left="60%" top="60%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 3) && uniqueList[startIndex + 3 - 1].days} email={ uniqueList.length >= (startIndex + 3) && uniqueList[startIndex + 3 - 1].email} />
-              <SidVg width={8} left="60%" top="15%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 11) && uniqueList[startIndex + 11 - 1].days} email={ uniqueList.length >= (startIndex + 11) && uniqueList[startIndex + 11 - 1].email} />
+              <SidVg width={12} left="60%" top="10%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 3) && uniqueList[startIndex + 3 - 1].days} email={ uniqueList.length >= (startIndex + 3) && uniqueList[startIndex + 3 - 1].email} />
+              <SidVg width={8} left="60%" top="35%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 11) && uniqueList[startIndex + 11 - 1].days} email={ uniqueList.length >= (startIndex + 11) && uniqueList[startIndex + 11 - 1].email} />
               <SidVg width={8} left="85%" top="80%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 18) && uniqueList[startIndex + 18 - 1].days} email={ uniqueList.length >= (startIndex + 18) && uniqueList[startIndex + 18 - 1].email} />
             </UpDown>
             <SidVg width={8} left="5%" top="20%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 1) && uniqueList[startIndex + 1 - 1].days} email={ uniqueList.length >= (startIndex + 1) && uniqueList[startIndex + 1 - 1].email} />
             <SidVg width={12} left="15%" top="45%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 9) && uniqueList[startIndex + 9 - 1].days} email={ uniqueList.length >= (startIndex + 9) && uniqueList[startIndex + 9 - 1].email} />
-            <SidVg width={8} left="25%" top="5%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 2) && uniqueList[startIndex + 2 - 1].days} email={ uniqueList.length >= (startIndex + 2) && uniqueList[startIndex + 2 - 1].email} />
+            <SidVg width={8} left="25%" top="5%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 6) && uniqueList[startIndex + 6 - 1].days} email={ uniqueList.length >= (startIndex + 6) && uniqueList[startIndex + 6 - 1].email} />
             <SidVg width={12} left="30%" top="85%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 15) && uniqueList[startIndex + 15 - 1].days} email={ uniqueList.length >= (startIndex + 15) && uniqueList[startIndex + 15 - 1].email} />
-            <SidVg width={12} left="45%" top="70%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 7) && uniqueList[startIndex + 7 - 1].days} email={ uniqueList.length >= (startIndex + 7) && uniqueList[startIndex + 7 - 1].email} />
-            <SidVg width={12} left="65%" top="40%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 17) && uniqueList[startIndex + 17 - 1].days} email={ uniqueList.length >= (startIndex + 17) && uniqueList[startIndex + 17 - 1].email} />
-            <SidVg width={8} left="80%" top="55%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 6) && uniqueList[startIndex + 6 - 1].days} email={ uniqueList.length >= (startIndex + 6) && uniqueList[startIndex + 6 - 1].email} />
+            <SidVg width={12} left="45%" top="70%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 4) && uniqueList[startIndex + 4 - 1].days} email={ uniqueList.length >= (startIndex + 4) && uniqueList[startIndex + 4 - 1].email} />
+            <SidVg width={12} left="65%" top="50%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 17) && uniqueList[startIndex + 17 - 1].days} email={ uniqueList.length >= (startIndex + 17) && uniqueList[startIndex + 17 - 1].email} />
+            <SidVg width={8} left="80%" top="55%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 2) && uniqueList[startIndex + 2 - 1].days} email={ uniqueList.length >= (startIndex + 2) && uniqueList[startIndex + 2 - 1].email} />
             <SidVg width={12} left="85%" top="10%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 12) && uniqueList[startIndex + 12 - 1].days} email={ uniqueList.length >= (startIndex + 12) && uniqueList[startIndex + 12 - 1].email} />
           </Divider>
         </div>
