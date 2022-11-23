@@ -99,9 +99,8 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
             name="name"
             control={control}
             render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { isTouched, isDirty, error },
-              formState,
+              field: { onChange, onBlur, value },
+              fieldState: { error },
             }) => (
               <Fragment>
                 <Flex><Label htmlFor="name">INFO email</Label>
@@ -124,9 +123,8 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
             name="days"
             control={control}
             render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { isTouched, isDirty, error },
-              formState,
+              field: { onChange, onBlur, value },
+              fieldState: { error },
             }) => (
               <Fragment>
                 <Flex><Label htmlFor="days">Days until return</Label>
@@ -148,7 +146,7 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
             rules={{ required: 'Required!' }}
           />
 
-          <Button type="submit" sx={{mt: 12, minWidth: 200}} disabled={isLoading} >{isLoading ? <Spinner size={16} sx={{color: 'white', ml: 20}}/> : 'Submit your days!'}</Button>
+          <Button type="submit" sx={{mt: 12, minWidth: 200}} disabled={isLoading} >{isLoading ? <Spinner size={16} sx={{color: 'white', ml: 20}}/> : 'Submit'}</Button>
           
         </form>
         <Flex sx={{mb: 400}}></Flex>
