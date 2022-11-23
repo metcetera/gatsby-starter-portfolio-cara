@@ -51,11 +51,6 @@ const Estimations = () => {
 
   const handleClickName = () => {
     setHowname(!showName)
-
-    setTimeout(() => {
-      console.log("Delayed for 1 second.");
-      setHowname(false)
-    }, 10000)
   }
 
   console.log(startIndex, 'uniqueList: ', uniqueList);
@@ -100,7 +95,7 @@ const Estimations = () => {
             <SidVg width={8} left="25%" top="5%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 6) && uniqueList[startIndex + 6 - 1].days} email={ uniqueList.length >= (startIndex + 6) && uniqueList[startIndex + 6 - 1].email} />
             <SidVg width={12} left="30%" top="85%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 15) && uniqueList[startIndex + 15 - 1].days} email={ uniqueList.length >= (startIndex + 15) && uniqueList[startIndex + 15 - 1].email} />
             <SidVg width={12} left="45%" top="70%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 4) && uniqueList[startIndex + 4 - 1].days} email={ uniqueList.length >= (startIndex + 4) && uniqueList[startIndex + 4 - 1].email} />
-            <SidVg width={12} left="65%" top="50%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 17) && uniqueList[startIndex + 17 - 1].days} email={ uniqueList.length >= (startIndex + 17) && uniqueList[startIndex + 17 - 1].email} />
+            <SidVg width={12} left="65%" top="65%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 17) && uniqueList[startIndex + 17 - 1].days} email={ uniqueList.length >= (startIndex + 17) && uniqueList[startIndex + 17 - 1].email} />
             <SidVg width={8} left="80%" top="55%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 2) && uniqueList[startIndex + 2 - 1].days} email={ uniqueList.length >= (startIndex + 2) && uniqueList[startIndex + 2 - 1].email} />
             <SidVg width={12} left="85%" top="10%" showName={showName} loading={loading} days={ uniqueList.length >= (startIndex + 12) && uniqueList[startIndex + 12 - 1].days} email={ uniqueList.length >= (startIndex + 12) && uniqueList[startIndex + 12 - 1].email} />
           </Divider>
