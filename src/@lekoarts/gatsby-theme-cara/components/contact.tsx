@@ -148,7 +148,7 @@ const Contact = ({ offset, factor = 1 }: { offset: number; factor?: number }) =>
             rules={{ required: 'Required!' }}
           />
 
-          <Button type="submit" sx={{mt: 12, width: 300}} disabled={isLoading} >{isLoading ? <Spinner size={16} sx={{color: 'white', ml: 20}}/> : 'Submit your wise vision!'}</Button>
+          <Button type="submit" sx={{mt: 12, minWidth: 200}} disabled={isLoading} >{isLoading ? <Spinner size={16} sx={{color: 'white', ml: 20}}/> : 'Submit your days!'}</Button>
           
         </form>
         <Flex sx={{mb: 400}}></Flex>

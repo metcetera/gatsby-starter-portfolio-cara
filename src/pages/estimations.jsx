@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react"
 import SteinStore from "stein-js-client";
 import { Flex, Button } from "theme-ui"
+import { Themed } from "@theme-ui/mdx"
 
 import { Parallax } from "@react-spring/parallax"
 import Layout from "@lekoarts/gatsby-theme-cara/src/components/layout"
@@ -66,12 +67,16 @@ const Estimations = () => {
         <div>
           <Divider speed={0.2} offset={0} factor={1}>
 
+
             <Flex sx={{justifyContent: 'center'}} >
               <Button disabled={startIndex <= 0} onClick={() => { handleClickVotes((startIndex > 0 ? startIndex - 20 : 0))}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${startIndex <= 0 ? 'lightgrey' : 'white'}`}} >{'previous'}</Button>
               <Button onClick={handleClickName} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >√</Button>
               <Button sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >{`(${startIndex + 1} - ${(startIndex + 20 > uniqueList.length) ? uniqueList.length : startIndex + 20})`}</Button>
               <Button onClick={() => { setRefresh((refresh + 1))}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >refresh</Button>
               <Button disabled={!uniqueList || startIndex + 20 >= uniqueList.length } onClick={() => { handleClickVotes(startIndex + 20)}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${!uniqueList || startIndex + 20 >= uniqueList.length ? 'lightgrey' : 'white'}`}} >{'next'}</Button>
+            </Flex>
+            <Flex sx={{justifyContent: 'center'}} >
+              <Themed.h2>Estimations</Themed.h2>
             </Flex>
 
             <UpDownWide>
