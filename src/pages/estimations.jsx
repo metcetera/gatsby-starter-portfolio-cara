@@ -33,18 +33,28 @@ const Estimations = () => {
         setUuniqueList([...new Map(data.map(v => [v.email, v])).values()])
         setStartIndex(0)
         setLoading(false)
-
+        setHowname(false)
       });
   },[store, refresh])
 
-  const handleClick = (val) => {
+  const handleClickVotes = (val) => {
     setStartIndex(val)
     setLoading(true)
 
     setTimeout(() => {
       console.log("Delayed for 1 second.");
       setLoading(false)
+      setHowname(false)
     }, 1000)
+  }
+
+  const handleClickName = () => {
+    setHowname(!showName)
+
+    setTimeout(() => {
+      console.log("Delayed for 1 second.");
+      setHowname(false)
+    }, 10000)
   }
 
   console.log(startIndex, 'uniqueList: ', uniqueList);
@@ -57,11 +67,11 @@ const Estimations = () => {
           <Divider speed={0.2} offset={0} factor={1}>
 
             <Flex sx={{justifyContent: 'center'}} >
-              <Button disabled={startIndex <= 0} onClick={() => { handleClick((startIndex > 0 ? startIndex - 20 : 0))}} sx={{fontSize: '12px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${startIndex <= 0 ? 'lightgrey' : 'white'}`}} >{'previous'}</Button>
-              <Button onClick={() => setHowname(!showName)} sx={{fontSize: '12px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >√</Button>
-              <Button sx={{fontSize: '12px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >{`(${startIndex + 1} - ${(startIndex + 20 > uniqueList.length) ? uniqueList.length : startIndex + 20})`}</Button>
-              <Button onClick={() => { setRefresh((refresh + 1))}} sx={{fontSize: '12px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >refresh</Button>
-              <Button disabled={!uniqueList || startIndex + 20 >= uniqueList.length } onClick={() => { handleClick(startIndex + 20)}} sx={{fontSize: '12px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${!uniqueList || startIndex + 20 >= uniqueList.length ? 'lightgrey' : 'white'}`}} >{'next'}</Button>
+              <Button disabled={startIndex <= 0} onClick={() => { handleClickVotes((startIndex > 0 ? startIndex - 20 : 0))}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${startIndex <= 0 ? 'lightgrey' : 'white'}`}} >{'previous'}</Button>
+              <Button onClick={handleClickName} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >√</Button>
+              <Button sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >{`(${startIndex + 1} - ${(startIndex + 20 > uniqueList.length) ? uniqueList.length : startIndex + 20})`}</Button>
+              <Button onClick={() => { setRefresh((refresh + 1))}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px'}} >refresh</Button>
+              <Button disabled={!uniqueList || startIndex + 20 >= uniqueList.length } onClick={() => { handleClickVotes(startIndex + 20)}} sx={{fontSize: '14px', zIndex: '1000', p: '2px', px: '10px', m: '2px', color: `${!uniqueList || startIndex + 20 >= uniqueList.length ? 'lightgrey' : 'white'}`}} >{'next'}</Button>
             </Flex>
 
             <UpDownWide>

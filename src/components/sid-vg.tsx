@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Box } from "theme-ui"
+import { jsx, Box, Text } from "theme-ui"
 import { tailwind } from "@theme-ui/presets"
 import SidSVG from '../../static/slackney-circle.png';
 
@@ -13,7 +13,7 @@ type SVGProps = {
 
 const SidVG = ({ stroke = false, color = ``, width, left, top = '', showName = false, loading = false, days, email }) => {
 
-  return (
+  return days && (
     <Box 
       sx={{
         position: `absolute`,
@@ -41,22 +41,24 @@ const SidVG = ({ stroke = false, color = ``, width, left, top = '', showName = f
             display: !loading ? 'block' : 'none',
             width,
             maxwidth: width,
-            fontSize: '12px',
-            color: loading ? tailwind.colors.red[5] : tailwind.colors.gray[5],
+            fontSize: '14px',
+            color: loading ? tailwind.colors.red[8] : tailwind.colors.gray[8],
             // position: `relative`,
             // display: `flex`,
-            // transform: 'rotate(-90deg)',
+            // transform: showName ? 'rotate(90deg)' : '',
             // bottom: -10 * width,
             textAlign: 'center',
-            wordBreak: 'break-word',
+            // wordBreak: 'break-word',
+            lineHeight: '14px',
+            mt: '-6px',
             // border: '1px solid lightgrey',
             transitionDuration: '3000ms',
             transitionProperty: 'all',
             }}
       >
-        {days} day{days > 1 ? 's' : ''}
+        <strong>{days}</strong> day{days > 1 ? 's' : ''}
         <br />
-        {showName && <span>{email}</span>}
+        {showName && <Text sx={{}}>{email}</Text>}
       </Box>
 
     </Box>
