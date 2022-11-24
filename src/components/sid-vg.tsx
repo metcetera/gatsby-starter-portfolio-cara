@@ -3,13 +3,7 @@ import { jsx, Box, Text } from "theme-ui"
 import { tailwind } from "@theme-ui/presets"
 import SidSVG from '../../static/slackney-circle.png';
 
-type SVGProps = {
-  stroke?: boolean
-  color?: string | number | any
-  width: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | 20 | 24 | 32 | 40 | 48 | 56 | 64 | string
-  left: string
-  top: string
-}
+// https://emoji.slack-edge.com/T025AMBA7/sidneysmile/91cbcaea3735152b.png
 
 const SidVG = ({ stroke = false, color = ``, width, left, top = '', showName = false, loading = false, days, email }) => {
 

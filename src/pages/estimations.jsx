@@ -8,8 +8,6 @@ import Layout from "@lekoarts/gatsby-theme-cara/src/components/layout"
 import Divider from "@lekoarts/gatsby-theme-cara/src/elements/divider"
 import { UpDown, UpDownWide } from "@lekoarts/gatsby-theme-cara/src/styles/animations"
 import Seo from "@lekoarts/gatsby-theme-cara/src/components/seo"
-import Content from "@lekoarts/gatsby-theme-cara/src/elements/content"
-import Inner from "@lekoarts/gatsby-theme-cara/src/elements/inner"
 import SidVg from "../components/sid-vg"
 
 const Estimations = () => { 
@@ -52,7 +50,7 @@ const Estimations = () => {
     setHowname(!showName)
   }
 
-  console.log(startIndex, 'uniqueList: ', uniqueList);
+  // console.log(startIndex, 'uniqueList: ', uniqueList);
 
 
   return (
