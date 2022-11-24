@@ -119,7 +119,6 @@ const QuizForm = () => {
           <Button type="submit" sx={{mt: 12, minWidth: 200}} disabled={isLoading} >{isLoading ? <Spinner size={16} sx={{color: 'white', ml: 20}}/> : 'Submit'}</Button>
           
         </form>
-        <Flex sx={{mb: 400}}></Flex>
     </>
 
     )

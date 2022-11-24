@@ -45,7 +45,7 @@ const Quizz = () => (
         </Divider>
         <Content sx={{ variant: `texts.bigger` }} speed={0.4} offset={0} factor={1}>
           <Inner>
-            <Themed.h1>The Quizz Form</Themed.h1>
+            <Themed.h1>Quizz Form</Themed.h1>
             <QuizForm />
             <Themed.p>
               Go back to <Link to="/">homepage</Link>.
