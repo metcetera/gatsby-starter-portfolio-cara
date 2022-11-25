@@ -11,10 +11,10 @@ module.exports = {
     // You can also add new values here to query them like usual
     // See all options: https://github.com/LekoArts/gatsby-themes/blob/main/themes/gatsby-theme-cara/gatsby-config.js
     siteTitle: `Cheers Sidney`,
-    siteTitleAlt: `Cheers Sidney`,
-    siteHeadline: `Cheers Sidney`,
+    siteTitleAlt: `Cheers Sidney - In how many days is Sidney starting on another INFO project?`,
+    siteHeadline: `Cheers Sidney - In how many days is Sidney starting on another INFO project?`,
     siteUrl: `https://cheers-sidney.info.nl`,
-    siteDescription: `Cheers Sidney`,
+    siteDescription: `In how many days is Sidney starting on another INFO project?`,
     siteImage: `/android-chrome-512x512.png`,
     author: `@team-roubaix`,
   },
