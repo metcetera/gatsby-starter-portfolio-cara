@@ -152,6 +152,16 @@ const theme = merge(tailwind, {
       },
     },
   },
+  alerts: {
+    primary: {
+      color: 'background',
+      bg: tailwind.colors.orange[7],
+    },
+    muted: {
+      color: 'text',
+      bg: 'muted',
+    },
+  },
 })
 
 export default theme
